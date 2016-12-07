@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "jupyterlab_react_labextension",
+  "version": "0.1.0",
+  "description": "A JupyterLab extension for rendering React",
+  "author": "Grant Nestor",
+  "main": "lib/plugin.js",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab extension"
+  ],
+  "scripts": {
+    "build": "node build_extension.js",
+    "watch": "watch \"npm run build\" src --wait 10 --ignoreDotFiles",
+    "prepublish": "npm run build",
+    "extension:install": "jupyter labextension install --symlink --py --sys-prefix jupyterlab_react",
+    "extension:uninstall": "jupyter labextension uninstall --py --sys-prefix jupyterlab_react",
+    "extension:enable": "jupyter labextension enable --py --sys-prefix jupyterlab_react",
+    "extension:disable": "jupyter labextension disable --py --sys-prefix jupyterlab_react"
+  },
+  "dependencies": {
+    "jupyterlab": ">=0.11.0",
+    "phosphor": "^0.7.0"
+  },
+  "devDependencies": {
+    "@jupyterlab/extension-builder": ">=0.10.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-preset-latest": "^6.16.0",
+    "watch": "^1.0.1"
+  }
+}
