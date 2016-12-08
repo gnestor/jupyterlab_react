@@ -1,5 +1,6 @@
 import { Widget } from 'phosphor/lib/ui/widget';
 import { ABCWidgetFactory } from 'jupyterlab/lib/docregistry';
+import asyncReactDOM from './component';
 
 /**
  * The class name added to a DocWidget.
@@ -30,6 +31,7 @@ export class DocWidget extends Widget {
   dispose() {
     if (!this.isDisposed) {
       this._context = null;
+      asyncReactDOM.unmountComponentAtNode(this.node);
       super.dispose();
     }
   }
@@ -41,9 +43,9 @@ export class DocWidget extends Widget {
     this.title.label = this._context.path.split('/').pop();
     if (this.isAttached) {
       let content = this._context.model.toString();
-      let json = content ? JSON.parse(content) : {};
-      let text = document.createTextNode(JSON.stringify(json));
-      this.node.appendChild(text);
+      let { module, type, props } = content ? JSON.parse(content) : {};
+      asyncReactDOM.render(module, { type, props }, this.node);
+      // asyncReactDOM.render(data, this.node);
     }
   }
 

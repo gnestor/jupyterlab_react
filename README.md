@@ -1,8 +1,8 @@
 # jupyterlab_react
 
-A JupyterLab and Jupyter Notebook extension for rendering React data
+A JupyterLab and Jupyter Notebook extension for rendering data with dynamically loaded React components
 
-![output renderer](http://g.recordit.co/QAsC7YULcY.gif)
+![screencap](http://g.recordit.co/sZaBISo1t8.gif )
 
 ## Prerequisites
 
@@ -13,20 +13,32 @@ A JupyterLab and Jupyter Notebook extension for rendering React data
 To render React output in IPython:
 
 ```python
-from IPython.display import JSON
-JSON({
-    'string': 'string',
-    'array': [1, 2, 3],
-    'bool': True,
-    'object': {
-        'foo': 'bar'
+from IPython.display import display
+
+def React(data, module=None):
+    bundle = {
+        'application/vnd.react.v1+json': {
+            'module': module,
+            'type': data['type'],
+            'props': data['props']
+        },
+        'application/json': data['props'],
+        'text/plain': '<IPython.core.display.React.object>'
     }
-})
+    display(bundle, raw=True)
+    
+React({
+    'type': 'JSONTree',
+    'props': {
+        'data': [
+            {'month': 'September', 'profit': 35000, 'loss': 2000},
+            {'month': 'October', 'profit': 42000, 'loss': 8000},
+            {'month': 'November', 'profit': 55000, 'loss': 5000}
+        ],
+        'theme': 'google'
+    }
+}, module='react-json-tree')
 ```
-
-To render a .react.json file as a tree, simply open it:
-
-![file renderer](http://g.recordit.co/cbf0xnQHKn.gif)
 
 ## Install
 

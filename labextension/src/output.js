@@ -1,4 +1,5 @@
 import { Widget } from 'phosphor/lib/ui/widget';
+import asyncReactDOM from './component';
 
 /**
  * The class name added to this OutputWidget.
@@ -28,16 +29,15 @@ export class OutputWidget extends Widget {
    * A message handler invoked on an `'before-detach'` message.
    */
   onBeforeDetach(msg) {
-    
+    asyncReactDOM.unmountComponentAtNode(this.node);
   }
 
   /**
    * A render function given the widget's DOM node.
    */
   _render() {
-    let json = this._source;
-    let text = document.createTextNode(JSON.stringify(json));
-    this.node.appendChild(text);
+    let { module, type, props } = this._source;
+    asyncReactDOM.render(module, { type, props }, this.node);
   }
 
 }

@@ -1,7 +1,10 @@
 labextension/lib/
 nbextension/lib/
 nbextension/embed/
+component/dist
+component/test
 */node_modules/
+*/jspm_packages/
 npm-debug.log
 *.egg-info/
 build/

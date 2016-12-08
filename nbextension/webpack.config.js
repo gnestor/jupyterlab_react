@@ -9,7 +9,7 @@ var loaders = [
     },
     { 
         test: /\.js$/, 
-        exclude: /node_modules/, 
+        exclude: [/node_modules/, /component/], 
         loader: 'babel-loader',
         query: {
             presets: ['latest']

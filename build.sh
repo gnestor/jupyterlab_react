@@ -11,6 +11,8 @@ else
     exit 1
 fi
 
+cp -rf component/lib/ labextension/src/component/ && cp -rf component/lib/ nbextension/src/component/
+
 cd labextension
 npm install
 cd ..

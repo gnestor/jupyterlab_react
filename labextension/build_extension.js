@@ -17,7 +17,7 @@ buildExtension({
         { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
         { test: /\.json$/, loader: 'json-loader' },
         { test: /\.js$/,
-          exclude: /node_modules/, 
+          exclude: [/node_modules/, /component/], 
           loader: 'babel-loader',
           query: {
             presets: ['latest'],

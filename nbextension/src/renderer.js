@@ -1,3 +1,4 @@
+import asyncReactDOM from './component';
 import './index.css';
 
 const MIME_TYPE = 'application/vnd.react.v1+json';
@@ -5,9 +6,8 @@ const MIME_TYPE = 'application/vnd.react.v1+json';
 //
 // Render data to the output area
 // 
-function render(data, node) {
-  const text = document.createTextNode(JSON.stringify(data));
-  node.appendChild(text);
+function render({ module, type, props }, node) {
+  asyncReactDOM.render(module, { type, props }, node);
 }
 
 //
@@ -25,17 +25,11 @@ export function register_renderer($) {
     element.append(toinsert);
     return toinsert;
   };
-  // Calculate the index of this renderer in `OutputArea.display_order` or pass an integer
-  const mime_types = OutputArea.mime_types();
-  const json_types = mime_types.filter(mimetype => mimetype.includes('+json'));
-  // Insert this renderer after any renderers with mime type that matches "application/*+json"
-  const index = mime_types.lastIndexOf(json_types.pop() + 1);
-  // Register the mime type and append_mime_type function with the notebook's OutputArea
   OutputArea.register_mime_type(MIME_TYPE, append_mime, {
     // Is output safe?
-    safe: false,
+    safe: true,
     // Index of renderer in `OutputArea.display_order`
-    index: index
+    index: 0
   });
 }
 
