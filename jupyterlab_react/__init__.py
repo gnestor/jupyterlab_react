@@ -1,6 +1,8 @@
+from IPython.display import display
+
+
 # Running `npm run build` will create static resources in the static
 # directory of this Python package (and create that directory if necessary).
-
 
 def _jupyter_labextension_paths():
     return [{
@@ -15,3 +17,20 @@ def _jupyter_nbextension_paths():
         'dest': 'jupyterlab_react',
         'require': 'jupyterlab_react/extension'
     }]
+
+
+# A display function that can be used within a notebook. E.g.:
+#   from jupyterlab_react import React
+#   React(data)
+    
+def React(data, module=None):
+    bundle = {
+        'application/vnd.react.v1+json': {
+            'module': module,
+            'type': data['type'],
+            'props': data['props']
+        },
+        'application/json': data,
+        'text/plain': 'jupyterlab_react.React object>'
+    }
+    display(bundle, raw=True)
