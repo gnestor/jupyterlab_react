@@ -13,21 +13,9 @@ A JupyterLab and Jupyter Notebook extension for rendering data with dynamically 
 To render React output in IPython:
 
 ```python
-from IPython.display import display
+from jupyterlab_react import React
 
-def React(data, module=None):
-    bundle = {
-        'application/vnd.react.v1+json': {
-            'module': module,
-            'type': data['type'],
-            'props': data['props']
-        },
-        'application/json': data['props'],
-        'text/plain': '<IPython.core.display.React.object>'
-    }
-    display(bundle, raw=True)
-    
-React({
+element = {
     'type': 'JSONTree',
     'props': {
         'data': [
@@ -37,7 +25,9 @@ React({
         ],
         'theme': 'google'
     }
-}, module='react-json-tree')
+}
+    
+React(element, module='react-json-tree')
 ```
 
 ## Install
