@@ -1,4 +1,5 @@
 from IPython.display import display
+import json
 
 
 # Running `npm run build` will create static resources in the static
@@ -31,6 +32,6 @@ def React(data, module=None):
             'props': data['props']
         },
         'application/json': data,
-        'text/plain': 'jupyterlab_react.React object>'
+        'text/plain': json.dumps(data, indent=4)
     }
     display(bundle, raw=True)
