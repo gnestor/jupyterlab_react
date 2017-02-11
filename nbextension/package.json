@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab_react_nbextension",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "A Jupyter Notebook extension for rendering React",
   "author": "Grant Nestor",
   "main": "lib/index.js",
